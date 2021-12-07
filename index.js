@@ -4,8 +4,11 @@ const swaggerUi = require('swagger-ui-express')
 const yaml = require('yamljs')
 const swaggerDocument = yaml.load('./swagger.yaml')
 
+const fileUpload = require('express-fileupload')
+
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument))
 app.use(express.json()) // body parser
+app.use(fileUpload())
 
 let courses = [{
         id: "11",
@@ -62,5 +65,14 @@ app.get("/api/v1/coursequery", (req, res) => {
     res.send({location, device})
 })
 
+app.post("/api/v1/uploadImage", (req, res) => {
+    const file = req.files.file
+    let path = __dirname+`/images/${Date.now()}.jpg` // upload image to images folder
+    console.log(path)
+
+    file.mv(path, err => {        
+        res.send(true)
+    })
+})
 
 app.listen(4000, ()=> console.log(`server is running at port 4000...`))

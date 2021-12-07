@@ -215,3 +215,31 @@ paths:
           description: not found
         500:
           description: Internal Server Error
+  /uploadImage:
+    post:
+      tags:
+        - Image
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+      summary: uploading course image
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                type: boolean
+                example: true
+        400:
+          description: bad request
+        404:
+          description: not found
+        500:
+          description: Internal Server Error
