@@ -71,7 +71,7 @@ paths:
                   name:
                     type: string
                   price:
-                    type: string  
+                    type: number  
                 example: {id:55, name:"mystring", price:100}
         400:
           description: bad request
@@ -126,7 +126,51 @@ paths:
                   name:
                     type: string
                   price:
+                    type: number
+                example: {id:55, name:"mystring", price:100}
+        400:
+          description: bad request
+        404:
+          description: not found
+        500:
+          description: Internal Server Error
+  /addCourse:
+    post:
+      tags:
+        - Body
+      requestBody:
+        required: true
+        content: 
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: string
+                name:
+                  type: string
+                price:
+                  type: number
+        description: add a new course to append to list
+      summary: Adds a new course to existing list
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
                     type: string
+                  name:
+                    type: string
+                  price:
+                    type: number
                 example: {id:55, name:"mystring", price:100}
         400:
           description: bad request
