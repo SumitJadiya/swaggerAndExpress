@@ -24,7 +24,7 @@ let courses = [{
         price: 199
 }]
 
-
+// get requests
 app.get("/", (req, res) => {
     res.send('Hello')
 })
