@@ -1,0 +1,136 @@
+openapi: 3.0.0
+info:
+  title: Learn express and swagger
+  description: Segment about writing docs
+  version: 1.0.1
+  contact:
+    email: jadiyaskj@gmail.com
+    url: "stjapps.in"
+# servers:
+#   - url: "https://localhost:4000/api/v1"
+#     description: for local host - secured
+#   - url: "http://localhost:4000/api/v1"
+#     description: for local host -  regular
+servers:
+  - url: "{protocol}://localhost:4000/api/{version}"
+    description: for local host
+    variables:
+      protocol:
+        default: http
+        enum:
+          - http
+          - https
+      version:
+        default: v1
+        enum:
+          - v1
+          - v2
+components:
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: token
+    BearerAuth:
+      type: http
+      scheme: bearer
+
+paths:
+  /learn:
+    get:
+      tags:
+        - String
+      summary: returns a greet message from courses
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                type: string
+                example: "mystring"
+        400:
+          description: bad request
+        500:
+          description: Internal Server Error
+  /learnObject:
+    get:
+      tags:
+        - Object
+      summary: returns a unique course object
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                type: string
+                properties:
+                  id:
+                    type: string
+                  name:
+                    type: string
+                  price:
+                    type: string  
+                example: {id:55, name:"mystring", price:100}
+        400:
+          description: bad request
+        500:
+          description: Internal Server Error
+  /courses:
+    get:
+      tags:
+        - Array
+      summary: return all courses
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    name:
+                      type: string
+                    price:
+                      type: number
+                example: [{id:55, name:"mystring", price:100}]
+        400:
+          description: bad request
+        500:
+          description: Internal Server Error
+  /mycourse/{courseId}:
+    get:
+      tags:
+        - Param
+      parameters:
+        - in: path
+          name: courseId
+          schema:
+            type: string
+      summary: return course based on course id
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  name:
+                    type: string
+                  price:
+                    type: string
+                example: {id:55, name:"mystring", price:100}
+        400:
+          description: bad request
+        404:
+          description: not found
+        500:
+          description: Internal Server Error
