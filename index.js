@@ -65,6 +65,7 @@ app.get("/api/v1/coursequery", (req, res) => {
     res.send({location, device})
 })
 
+// handle image and header
 app.post("/api/v1/uploadImage", (req, res) => {
     console.log(req.headers)
     const file = req.files.file
