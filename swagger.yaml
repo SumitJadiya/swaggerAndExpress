@@ -178,3 +178,40 @@ paths:
           description: not found
         500:
           description: Internal Server Error
+  /coursequery:
+    get:
+      tags:
+        - Query
+      parameters:
+        - in: query
+          name: location
+          required: true
+          schema:
+            type: string
+            enum: [delhi, london, pune]
+        - in: query
+          name: device
+          required: true
+          schema:
+            type: string
+            enum: [web, mobile]
+      summary: exploring query param
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  location:
+                    type: string
+                  device:
+                    type: string
+                example: {"location": "pune","device": "macbook"}
+        400:
+          description: bad request
+        404:
+          description: not found
+        500:
+          description: Internal Server Error

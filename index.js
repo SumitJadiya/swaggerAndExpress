@@ -53,4 +53,14 @@ app.post("/api/v1/addCourse", (req, res) => {
     res.send(true)
 })
 
+// handle url query -> localhost:4000/api/v1/coursequery?location=pune&device=macbook
+app.get("/api/v1/coursequery", (req, res) => {
+    let location = req.query.location
+    let device = req.query.device
+
+    console.log(req.query)
+    res.send({location, device})
+})
+
+
 app.listen(4000, ()=> console.log(`server is running at port 4000...`))
