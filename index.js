@@ -51,6 +51,7 @@ app.get("/api/v1/mycourse/:courseId", (req, res) => {
     res.status(200).send(temp)
 })
 
+// post request
 app.post("/api/v1/addCourse", (req, res) => {
     courses.push(req.body)
     res.send(true)
